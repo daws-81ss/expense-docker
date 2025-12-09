@@ -2,7 +2,7 @@ version: "3"
 networks:
   expense:
 volumes:
-    mysql:
+  mysql:
 services:
   mysql:
     image: nanda1516/mysql:v1
@@ -12,12 +12,13 @@ services:
   backend:
     image: nanda1516/backend:v1
     container_name: backend
+    command: sh -c "sleep 5 && node /opt/server/index.js"
     depends_on:
-    - mysql
+      - mysql
   frontend:
     image: nanda1516/frontend:v1
     container_name: frontend
     ports:
-    - 80:80
+      - 80:80
     depends_on:
-    - backend
+      - backend
