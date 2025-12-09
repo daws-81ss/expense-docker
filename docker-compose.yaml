@@ -1,0 +1,23 @@
+version: "3"
+networks:
+  expense:
+volumes:
+    mysql:
+services:
+  mysql:
+    image: nanda1516/mysql:v1
+    container_name: mysql
+    volumes:
+      - mysql:/var/lib/mysql/
+  backend:
+    image: nanda1516/backend:v1
+    container_name: backend
+    depends_on:
+    - mysql
+  frontend:
+    image: nanda1516/frontend:v1
+    container_name: frontend
+    ports:
+    - 80:80
+    depends_on:
+    - backend
